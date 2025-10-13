@@ -28,6 +28,13 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+#開発ツール追加導入
+gem "faker"
+gem "hamlit"
+gem "annotate"
+gem "better_errors"
+gem "binding_of_caller"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
@@ -42,7 +49,14 @@ gem "thruster", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+
+  #開発ツール追加導入
+  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  gem "pry"
+  gem "pry-rescue"
+  gem "pry-stack_explorer"
+  gem "rubocop-rails"
+
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
