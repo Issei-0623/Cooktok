@@ -76,5 +76,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
-#Deviseの導入
+# Deviseの導入
 gem 'devise'
+
+# sassの導入
+gem 'cssbundling-rails'
