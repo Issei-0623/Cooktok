@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  resource :mypage, controller: :mypages, only: [:show] do
+  resource :mypage, controller: :mypages, only: [:show, :edit, :update] do
     patch :avatar_update, on: :collection
+    delete :avatar_destroy, on: :collection
   end
+
 
 end

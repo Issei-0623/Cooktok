@@ -1,6 +1,7 @@
 body {
   background: #fff8e7;
   font-family: 'Noto Sans JP', sans-serif;
+  color: #333;
 }
 
 .mypage {
@@ -25,16 +26,99 @@ body {
     margin-bottom: 48px;
   }
 
-  .avatar {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 4px solid #fff;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 50px;
-}
+  .avatar-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 60px;
 
+    .avatar {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        object-fit: cover;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        transform: scale(1.02);
+      }
+    }
+
+    .plus-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 48px;
+        height: 48px;
+        background: #ff865e;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background 0.2s ease;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+
+        &:hover {
+            background: #ff9a7a;
+        }
+    }
+
+
+
+    .avatar-menu {
+      display: none;
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: #ffe9d2;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 10px 0;
+      width: 180px;
+      z-index: 10;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          padding: 12px 20px;
+          text-align: left;
+          font-weight: 500;
+          cursor: pointer;
+          transition: background 0.2s ease;
+
+          &:hover {
+            background: #ffd4a9;
+          }
+        }
+      }
+    }
+
+    .hidden-input {
+      display: none;
+    }
+
+    .delete-btn {
+      color: #fff;
+      background-color: #e06464;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #d14a4a;
+      }
+    }
+  }
 
   .actions {
     display: flex;
@@ -102,6 +186,23 @@ body {
     .actions {
       flex-direction: column;
       gap: 14px;
+    }
+
+    .avatar {
+      width: 220px;
+      height: 220px;
+    }
+
+    .plus-btn {
+      width: 40px;
+      height: 40px;
+      bottom: 8px;
+      right: 8px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }

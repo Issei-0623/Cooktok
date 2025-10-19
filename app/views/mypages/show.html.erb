@@ -1,15 +1,30 @@
 <div class="mypage">
-  <% if current_user.avatar.attached? %>
-    <%= image_tag current_user.avatar, class: 'avatar' %>
-  <% else %>
-    <%= image_tag 'default_avatar.png', class: 'avatar' %>
-  <% end %>
+    <div class="avatar-container">
+        <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, class: 'avatar' %>
+        <% else %>
+            <%= image_tag 'default_avatar.png', class: 'avatar' %>
+        <% end %>
 
-  <%= form_with model: current_user, url: avatar_update_mypage_path, local: true, html: { multipart: true } do |f| %>
-  <%= f.file_field :avatar %>
-  <%= f.submit "画像をアップロード" %>
-<% end %>
+        <div class="plus-btn">
+            <%= image_tag 'plus_btn.png' %>
+        </div>
 
+        <div class="avatar-menu">
+            <ul>
+                <li>
+                    <label for="user_avatar">画像を変更</label>
+                </li>
+                <li>
+                    <%= button_to "画像を削除", avatar_destroy_mypage_path, method: :delete, data: { turbo_confirm: "削除しますか？" }, class: "delete-btn" %>
+                </li>
+            </ul>
+        </div>
+
+    <%= form_with model: current_user, url: avatar_update_mypage_path, local: true, html: { multipart: true } do |f| %>
+        <%= f.file_field :avatar, id: "user_avatar", class: "hidden-input" %>
+    <% end %>
+    </div>
 
   <h1><%= current_user.name %>さん、ようこそ！</h1>
   <p>CookTokへログイン中です。</p>
