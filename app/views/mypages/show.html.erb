@@ -5,6 +5,12 @@
     <%= image_tag 'default_avatar.png', class: 'avatar' %>
   <% end %>
 
+  <%= form_with model: current_user, url: avatar_update_mypage_path, local: true, html: { multipart: true } do |f| %>
+  <%= f.file_field :avatar %>
+  <%= f.submit "画像をアップロード" %>
+<% end %>
+
+
   <h1><%= current_user.name %>さん、ようこそ！</h1>
   <p>CookTokへログイン中です。</p>
 

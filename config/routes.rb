@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  resource :mypage, controller: :mypages, only: [:show]
+  resource :mypage, controller: :mypages, only: [:show] do
+    patch :avatar_update, on: :collection
+  end
 
 end
