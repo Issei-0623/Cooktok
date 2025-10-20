@@ -5,9 +5,9 @@ import "controllers"
 document.addEventListener("DOMContentLoaded", () => {
   const plusBtn = document.querySelector(".plus-btn");
   const menu = document.querySelector(".avatar-menu");
+  const fileInput = document.querySelector("#user_avatar");
 
   if (plusBtn && menu) {
-
     plusBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       menu.classList.toggle("active");
@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", () => {
       menu.classList.remove("active");
+    });
+  }
+
+  if (fileInput) {
+    fileInput.addEventListener("change", () => {
+      fileInput.form.requestSubmit();
     });
   }
 });
