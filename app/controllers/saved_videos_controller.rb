@@ -38,12 +38,12 @@ class SavedVideosController < ApplicationController
   end
 
   def remove_from_folder
-  @video = current_user.saved_videos.find(params[:id])
-  @video.video_folders
-        .where(folder_id: params[:folder_id])
-        .destroy_all
-  @video.update!(needs_sorting: true)
-end
+    @video = current_user.saved_videos.find(params[:id])
+    @video.video_folders
+          .where(folder_id: params[:folder_id])
+          .destroy_all
+    @video.update!(needs_sorting: true)
+  end
 
   private
   def saved_video_params

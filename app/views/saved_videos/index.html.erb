@@ -10,9 +10,6 @@
           <%= render "shared/video_card", video: video do %>
 
             <%= form_with url: saved_video_path(video), method: :patch do |f| %>
-              <% selected_folder_id =
-                video.video_folders.find { |vf| vf.folder_id.present? }&.folder_id %>
-
             <% selected_folder_ids = video.video_folders.pluck(:folder_id) %>
 
                 <div class="folder-checkboxes">
