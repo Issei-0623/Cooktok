@@ -9,29 +9,37 @@
         <% @saved_videos.each do |video| %>
           <%= render "shared/video_card", video: video do %>
 
-            <%= form_with url: saved_video_path(video), method: :patch do |f| %>
-            <% selected_folder_ids = video.video_folders.pluck(:folder_id) %>
-
+            <% if @folders.any? %>
+              <%= form_with url: saved_video_path(video), method: :patch, class: "saved-video-folder-form" do |f| %>
+                <% selected_folder_ids = video.video_folders.pluck(:folder_id) %>
                 <div class="folder-checkboxes">
-                <% @folders.each do |folder| %>
+                  <% @folders.each do |folder| %>
                     <label class="folder-checkbox">
-                    <%= check_box_tag "folder_ids[]",
-                        folder.id,
-                        selected_folder_ids.include?(folder.id) %>
-                    <%= folder.name %>
+                      <%= check_box_tag "folder_ids[]",
+                          folder.id,
+                          selected_folder_ids.include?(folder.id) %>
+                      <%= folder.name %>
                     </label>
-                <% end %>
+                  <% end %>
                 </div>
-
-                <%= f.submit "移動", class: "btn btn-saved-search" %>
-
+                <div class="video-action-layout">
+                  <%= f.button "移動", type: "submit", class: "btn btn-saved-search btn-action" %>
+                  <%= link_to "削除",
+                      saved_video_path(video),
+                      class: "btn btn-delete btn-action",
+                      data: { turbo_method: :delete, turbo_confirm: "この動画を削除しますか？" } %>
+                </div>
+              <% end %>
+            <% else %>
+              <p class="no-folder-msg">フォルダがありません</p>
+              <div class="video-action-layout">
+                <%= link_to "フォルダを作成する", folders_path, class: "btn btn-folder btn-action" %>
+                <%= link_to "削除",
+                    saved_video_path(video),
+                    class: "btn btn-delete btn-action",
+                    data: { turbo_method: :delete, turbo_confirm: "この動画を削除しますか？" } %>
+              </div>
             <% end %>
-
-            <%= button_to "削除",
-                saved_video_path(video),
-                method: :delete,
-                form: { data: { turbo_confirm: "この動画を削除しますか？" } },
-                class: "btn btn-delete" %>
 
           <% end %>
         <% end %>

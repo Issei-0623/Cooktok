@@ -108,7 +108,19 @@
   display: flex;
   gap: 16px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+
+  form {
+    display: contents;
+  }
+}
+
+.folder-video-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .btn-secondary {

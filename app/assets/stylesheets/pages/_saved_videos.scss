@@ -16,13 +16,14 @@
 }
 
 .btn-edit {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background:  #ffae00;
   color: #000000;
-  padding: 6px 16px;
+  padding: 0 16px;
   border-radius: 8px;
   font-size: 15px;
-  height: 30px;
+  height: 36px;
   // font-weight: bold;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -34,13 +35,14 @@
 }
 
 .btn-delete {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background:  #ff0000;
   color: #fff;
-  padding: 6px 16px;
+  padding: 0 16px;
   border-radius: 8px;
   font-size: 15px;
-  height: 40px;
+  height: 36px;
   // font-weight: bold;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -51,6 +53,49 @@
   transform: translateY(-2px);
 }
 
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.video-action-layout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.search-page .saved-video-folder-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.no-folder-msg {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
 .folder-checkboxes {
   display: flex;
   flex-direction: column;
@@ -58,11 +103,22 @@
   margin-bottom: 10px;
 }
 
+.search-page .saved-video-folder-form .folder-checkboxes {
+  align-items: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 12px;
+}
+
 .folder-checkbox {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 20px;
+}
+
+.search-page .saved-video-folder-form .video-action-layout {
+  margin-top: 0;
 }
 
 .video-card-actions {

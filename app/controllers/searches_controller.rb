@@ -1,8 +1,4 @@
 class SearchesController < ApplicationController
-  require "net/http"
-  require "uri"
-  require "json"
-
   PER_PAGE = 12
 
   def index

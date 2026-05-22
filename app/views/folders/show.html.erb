@@ -6,16 +6,18 @@
       <div class="video-grid">
         <% @saved_videos.each do |video| %>
           <%= render "shared/video_card", video: video do %>
-            <%= button_to "このフォルダから外す",
-                remove_from_folder_saved_video_path(video, folder_id: @folder.id),
-                method: :post,
-                class: "btn btn-secondary" %>
+            <div class="folder-video-actions">
+              <%= button_to "このフォルダから外す",
+                  remove_from_folder_saved_video_path(video, folder_id: @folder.id),
+                  method: :post,
+                  class: "btn btn-secondary" %>
 
-            <%= button_to "削除",
-                saved_video_path(video),
-                method: :delete,
-                form: { data: { turbo_confirm: "この動画を削除しますか？" } },
-                class: "btn btn-delete" %>
+              <%= button_to "削除",
+                  saved_video_path(video),
+                  method: :delete,
+                  form: { data: { turbo_confirm: "この動画を削除しますか？" } },
+                  class: "btn btn-delete" %>
+            </div>
           <% end %>
         <% end %>
       </div>

@@ -1,5 +1,3 @@
-console.log("infinite_scroll loaded");
-
 let page = 1;
 let loading = false;
 let observer = null;

@@ -3,10 +3,6 @@
   min-height: 100vh;
   text-align: center;
 
-  .avatar {
-    opacity: 0.3;
-  }
-
   /* ===== ナビゲーション ===== */
   .navbar {
     position: absolute;
@@ -65,22 +61,13 @@
 
 @media (max-width: 480px) {
   .homepage {
-    margin: 20px auto;
+    margin: 0;
     padding: 16px 12px;
-    max-width: 360px;
-    overflow: visible;
-
-    .avatar {
-      width: 450px !important;
-      height: auto !important;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+    max-width: 100%;
+    overflow: hidden;
 
     .logo {
-      font-size: 70px;
+      font-size: clamp(42px, 13vw, 58px);
       top: 20%;
       transform: translate(-50%, -50%);
     }
