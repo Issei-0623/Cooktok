@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+  <% if saved %>
+    <%= button_to "保存解除",
+          saved_video_path(saved),
+          method: :delete,
+          class: "btn btn-unsave-search",
+          params: { youtube_video_id: video_id } %>
+  <% else %>
+    <%= form_with url: saved_videos_path, method: :post do %>
+      <%= hidden_field_tag "saved_video[title]", title %>
+      <%= hidden_field_tag "saved_video[url]", "https://www.youtube.com/embed/#{video_id}" %>
+      <%= hidden_field_tag "saved_video[nickname]", nickname %>
+      <%= hidden_field_tag "saved_video[username]", username %>
+      <%= hidden_field_tag :youtube_video_id, video_id %>
+      <%= submit_tag "保存", class: "btn btn-saved-search" %>
+    <% end %>
+  <% end %>
+<% end %>

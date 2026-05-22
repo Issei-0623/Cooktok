@@ -3,7 +3,7 @@
     <h1>YouTube Shorts を探す</h1>
     <p class="subtitle">ショート動画に特化した検索</p>
 
-    <%= form_with url: searches_path, method: :get, local: true do %>
+    <%= form_with url: searches_path, method: :get, local: true, html: { class: "search-form" } do %>
       <%= text_field_tag :keyword, params[:keyword],
         id: "keyword",
         placeholder: "例：親子丼の作り方" %>
@@ -19,36 +19,34 @@
         <% @videos.each do |video| %>
           <% snippet  = video["snippet"] %>
           <% video_id = video.dig("id", "videoId") %>
+          <% embed_url = "https://www.youtube.com/embed/#{video_id}" %>
+          <% saved = user_signed_in? ? current_user.saved_videos.find_by(url: embed_url) : nil %>
 
-          <% video_card = SavedVideo.new(
-            title: snippet["title"],
-            url: "https://www.youtube.com/embed/#{video_id}",
-            nickname: snippet["channelTitle"],
-            username: nil
-          ) %>
-
-          <%= render "shared/video_card", video: video_card do %>
-            <% if user_signed_in? %>
-              <% if (saved = current_user.saved_videos.find_by(url: video_card.url)) %>
-                <%= button_to "保存解除",
-                      saved_video_path(saved),
-                      method: :delete,
-                      data: { turbo: false },
-                      class: "btn btn-unsave-search" %>
-              <% else %>
-                <%= form_with model: video_card,
-                      url: saved_videos_path,
-                      method: :post,
-                      data: { turbo: false } do |f| %>
-                  <%= f.hidden_field :title %>
-                  <%= f.hidden_field :url %>
-                  <%= f.hidden_field :nickname %>
-                  <%= f.hidden_field :username %>
-                  <%= f.submit "保存", class: "btn btn-saved-search" %>
-                <% end %>
+          <div class="video-item">
+            <div class="video-card-header">
+              <% if snippet["channelTitle"].present? %>
+                <div class="creator">
+                  <strong><%= snippet["channelTitle"] %></strong>
+                </div>
               <% end %>
-            <% end %>
-          <% end %>
+              <p class="video-title"><%= snippet["title"] %></p>
+            </div>
+
+            <div class="video-frame">
+              <iframe src="<%= embed_url %>" allowfullscreen></iframe>
+            </div>
+
+            <div class="video-footer">
+              <div id="save-area-<%= video_id %>">
+                <%= render "shared/save_button",
+                      video_id: video_id,
+                      saved: saved,
+                      title: snippet["title"],
+                      nickname: snippet["channelTitle"],
+                      username: nil %>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
     <% else %>
@@ -64,4 +62,3 @@
   </div>
 
 </body>
-

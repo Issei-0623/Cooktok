@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/saitoissei/Desktop/個人/勉強/プライベート開発/CookTube log --oneline)",
+      "Bash(rm /Users/saitoissei/Desktop/個人/勉強/プライベート開発/CookTube/app/javascript/background_foods_common.js /Users/saitoissei/Desktop/個人/勉強/プライベート開発/CookTube/app/javascript/homepage_foods.js /Users/saitoissei/Desktop/個人/勉強/プライベート開発/CookTube/app/javascript/mypage_foods.js)"
+    ],
+    "additionalDirectories": [
+      "/Users/saitoissei/Desktop/個人/勉強/プライベート開発/CookTube/app/javascript"
+    ]
+  }
+}

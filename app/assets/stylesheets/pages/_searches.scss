@@ -17,14 +17,14 @@ body.search-page-wrapper .mypage {
   text-align: center;
 }
 
-.search-page form {
+.search-form {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
   gap: 12px;
 }
 
-.search-page input[type="text"] {
+.search-form input[type="text"] {
   width: 520px;
   height: 56px;
   font-size: 18px;
@@ -32,7 +32,7 @@ body.search-page-wrapper .mypage {
   border: 1px solid #ccc;
 }
 
-.search-page input[type="submit"] {
+.search-form input[type="submit"] {
   height: 56px;
   padding: 0 28px;
   font-size: 16px;
@@ -42,8 +42,8 @@ body.search-page-wrapper .mypage {
   cursor: pointer;
 }
 
-.search-page input[type="text"],
-.search-page input[type="submit"],
+.search-form input[type="text"],
+.search-form input[type="submit"],
 .btn,
 .btn-saved-search {
   border-radius: 8px;
@@ -88,6 +88,13 @@ body.search-page-wrapper .mypage {
   border: none;
   transition: background 0.2s ease;
   cursor: pointer;
+}
+
+.btn-saved-search.btn-action {
+  border-radius: 8px;
+  margin-top: 0;
+  height: 36px;
+  padding: 0 16px;
 }
 
 .btn.btn-saved-search:hover {

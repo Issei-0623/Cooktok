@@ -2,17 +2,6 @@
 <html>
   <head>
     <title><%= content_for(:title) || "CookTube" %></title>
-    <meta name="image-base-path" content="<%= File.dirname(image_url('cook/beef_bowl.png')) + '/' %>">
-        <% foods = %w[
-      beef_bowl bread broccoli carrot coffee croissant donut fish fried_egg hamburger
-      juice onigiri onion pancakes pasta potato ramen roast_chicken steak sushi strawberry tomato
-    ] %>
-
-    <% foods.each do |food| %>
-      <meta name="food-<%= food %>" content="<%= image_url("cook/#{food}.png") %>">
-    <% end %>
-
-
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -36,9 +25,6 @@
 
     <%# JavaScript (Importmap構成) %>
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "background_foods_common", defer: true %>
-    <%= javascript_include_tag "homepage_foods", defer: true %>
-    <%= javascript_include_tag "mypage_foods", defer: true %>
 
   </head>
 

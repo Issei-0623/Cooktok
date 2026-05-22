@@ -1,6 +1,6 @@
 <div class="mypage">
-  <%= render "shared/background_foods" %>
-    <div class="avatar-container">
+  <%= image_tag 'default_avatar.png', class: 'bg-cat' %>
+  <div class="avatar-container">
         <% if current_user.avatar.attached? %>
             <%= image_tag current_user.avatar, class: 'avatar' %>
         <% else %>
@@ -50,7 +50,4 @@
       class: "btn btn-logout" %>
   </div>
 </div>
-
-<%= javascript_include_tag "mypage_foods", defer: true %>
-
 
