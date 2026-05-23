@@ -16,38 +16,9 @@
       </p>
 
       <div id="video-grid" class="video-grid">
-        <% @videos.each do |video| %>
-          <% snippet  = video["snippet"] %>
-          <% video_id = video.dig("id", "videoId") %>
-          <% embed_url = "https://www.youtube.com/embed/#{video_id}" %>
-          <% saved = user_signed_in? ? current_user.saved_videos.find_by(url: embed_url) : nil %>
-
-          <div class="video-item">
-            <div class="video-card-header">
-              <% if snippet["channelTitle"].present? %>
-                <div class="creator">
-                  <strong><%= snippet["channelTitle"] %></strong>
-                </div>
-              <% end %>
-              <p class="video-title"><%= snippet["title"] %></p>
-            </div>
-
-            <div class="video-frame">
-              <iframe src="<%= embed_url %>" allowfullscreen></iframe>
-            </div>
-
-            <div class="video-footer">
-              <div id="save-area-<%= video_id %>">
-                <%= render "shared/save_button",
-                      video_id: video_id,
-                      saved: saved,
-                      title: snippet["title"],
-                      nickname: snippet["channelTitle"],
-                      username: nil %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: "shared/search_video_card",
+              collection: @videos,
+              as: :video %>
       </div>
     <% else %>
       <p>動画が見つかりませんでした。</p>
