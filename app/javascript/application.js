@@ -3,16 +3,22 @@ import "infinite_scroll"
 
 
 // フォルダフォームの開閉
-document.addEventListener("turbo:load", () => {
+const setupFolderFormToggle = () => {
   const btn = document.getElementById("show-folder-form");
   const form = document.getElementById("folder-form");
 
-  if (btn && form) {
-    btn.addEventListener("click", () => {
-      form.style.display = (form.style.display === "none") ? "block" : "none";
-    });
+  if (!btn || !form || btn.dataset.folderFormBound === "true") {
+    return;
   }
-});
+
+  btn.dataset.folderFormBound = "true";
+  btn.addEventListener("click", () => {
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+  });
+};
+
+document.addEventListener("turbo:load", setupFolderFormToggle);
+if (document.readyState !== "loading") setupFolderFormToggle();
 
 // アバターメニューの開閉
 document.addEventListener("turbo:load", () => {
