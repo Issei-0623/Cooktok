@@ -8,13 +8,27 @@ class SavedVideosController < ApplicationController
 
   def update
     video = current_user.saved_videos.find(params[:id])
-    video.video_folders.destroy_all
-    if params[:folder_ids].present?
-      params[:folder_ids].each do |folder_id|
-        video.video_folders.create(folder_id: folder_id)
+    folder_ids = Array(params[:folder_ids]).reject(&:blank?)
+    now = Time.current
+
+    video.transaction do
+      video.video_folders.destroy_all
+
+      if folder_ids.present?
+        VideoFolder.insert_all(
+          folder_ids.map do |folder_id|
+            {
+              saved_video_id: video.id,
+              folder_id: folder_id,
+              created_at: now,
+              updated_at: now
+            }
+          end
+        )
       end
+
+      video.update!(needs_sorting: false)
     end
-    video.update(needs_sorting: false)
     redirect_to saved_videos_path, notice: "動画を移動しました"
   end
 
