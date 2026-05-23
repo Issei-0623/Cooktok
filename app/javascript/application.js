@@ -2,7 +2,6 @@ import "@hotwired/turbo-rails"
 import "infinite_scroll"
 
 
-// フォルダフォームの開閉
 const setupFolderFormToggle = () => {
   const btn = document.getElementById("show-folder-form");
   const form = document.getElementById("folder-form");
@@ -17,47 +16,47 @@ const setupFolderFormToggle = () => {
   });
 };
 
-document.addEventListener("turbo:load", setupFolderFormToggle);
-if (document.readyState !== "loading") setupFolderFormToggle();
-
-// アバターメニューの開閉
-document.addEventListener("turbo:load", () => {
+const setupAvatarMenu = () => {
   const plusBtn = document.querySelector(".plus-btn");
   const menu = document.querySelector(".avatar-menu");
 
-  if (plusBtn && menu) {
-
-    plusBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      menu.classList.toggle("active");
-    });
-
-    menu.addEventListener("click", (event) => {
-      event.stopPropagation();
-    });
-
-    document.addEventListener("click", () => {
-      menu.classList.remove("active");
-    });
+  if (!plusBtn || !menu || plusBtn.dataset.avatarMenuBound === "true") {
+    return;
   }
-});
 
-// アバター画像変更の自動送信
-document.addEventListener("turbo:load", () => {
+  plusBtn.dataset.avatarMenuBound = "true";
+  plusBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    menu.classList.toggle("active");
+  });
+
+  menu.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+};
+
+const setupAvatarAutoSubmit = () => {
   const fileInput = document.querySelector("#user_avatar");
 
-  if (fileInput) {
-    fileInput.addEventListener("change", () => {
-      fileInput.form.requestSubmit();
-    });
+  if (!fileInput || fileInput.dataset.autoSubmitBound === "true") {
+    return;
   }
-});
 
-// フラッシュメッセージの自動削除
-document.addEventListener("turbo:load", () => {
+  fileInput.dataset.autoSubmitBound = "true";
+  fileInput.addEventListener("change", () => {
+    fileInput.form.requestSubmit();
+  });
+};
+
+const setupFlashMessages = () => {
   const flashes = document.querySelectorAll(".flash");
 
   flashes.forEach(flash => {
+    if (flash.dataset.autoDismissBound === "true") {
+      return;
+    }
+
+    flash.dataset.autoDismissBound = "true";
     setTimeout(() => {
       flash.classList.add("fade-out");
     }, 3000);
@@ -66,5 +65,26 @@ document.addEventListener("turbo:load", () => {
       flash.remove();
     }, 3500);
   });
-});
+};
 
+const closeAvatarMenus = () => {
+  document.querySelectorAll(".avatar-menu.active").forEach(menu => {
+    menu.classList.remove("active");
+  });
+};
+
+const setupPageScripts = () => {
+  setupFolderFormToggle();
+  setupAvatarMenu();
+  setupAvatarAutoSubmit();
+  setupFlashMessages();
+};
+
+document.addEventListener("click", closeAvatarMenus);
+document.addEventListener("turbo:load", setupPageScripts);
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupPageScripts);
+} else {
+  setupPageScripts();
+}
